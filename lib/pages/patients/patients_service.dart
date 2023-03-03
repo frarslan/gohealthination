@@ -12,7 +12,7 @@ class PatientsService{
   Future<List<Result>?> bringPatients() async {
     var token = await AuthProcess().getToken;
     if (token == null) {
-      throw Exception("Token not found");
+      throw Exception("Token not found not");
     }
     var response = await http.get(Uri.parse(url),
         headers: {
