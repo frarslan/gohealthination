@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gohealthination/pages/auth/auth_bloc.dart';
-import 'package:gohealthination/pages/freequote/home.dart';
 
 import '../../shared/custom_text.dart';
 import 'package:gohealthination/shared/custom_button.dart';
 import 'package:gohealthination/shared/logo.dart';
 
-import 'auth_progress.dart';
 import 'auth_service.dart';
 
 class LoginPage extends StatefulWidget {

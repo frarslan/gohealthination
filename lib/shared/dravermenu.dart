@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gohealthination/pages/freequote/home.dart';
+import 'package:gohealthination/pages/freequote/quote.dart';
 import 'package:gohealthination/pages/patients/patients.dart';
 import 'package:gohealthination/shared/custom_text.dart';
 
@@ -10,7 +10,6 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color1 = const Color(0xff3e2093);
     Color color2 = const Color(0xff37b2cb);
     Color color3 = const Color(0xffffffff);
 
@@ -33,7 +32,7 @@ class NavDrawer extends StatelessWidget {
             leading:  Icon(Icons.input, color: color2 ),
             title: const CustomText(text: 'Teklif Formları'),
             onTap: () => {Navigator.of(context).pop(),
-            Navigator.of(context).pushReplacement( MaterialPageRoute(builder: (BuildContext context) =>  const Home()))
+            Navigator.of(context).pushReplacement( MaterialPageRoute(builder: (BuildContext context) =>  const Quote()))
               },
 
           ),

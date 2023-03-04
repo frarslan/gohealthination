@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gohealthination/pages/freequote/home.dart';
 import 'package:gohealthination/pages/freequote/models/detailmodel.dart';
 import 'package:gohealthination/pages/freequote/quote_service.dart';
 import 'package:gohealthination/shared/custom_text.dart';
@@ -26,7 +25,6 @@ class _QuoteDetailState extends State<QuoteDetail> {
   Color color1 = const Color(0xff3e2093);
   Color color2 = const Color(0xff37b2cb);
   Color color3 = const Color(0xfffef5e4);
-    late Future<Detailmodel> _futureDetail;
 
   @override
   void initState() {
@@ -51,8 +49,7 @@ class _QuoteDetailState extends State<QuoteDetail> {
     return WillPopScope(
       onWillPop: () async {
 
-        Navigator.pushReplacement(
-            context, CupertinoPageRoute(builder: (context) => Home()));
+        Navigator.pop(context);
         return true;
       },
       child: Scaffold(

@@ -5,17 +5,16 @@ import 'package:gohealthination/pages/freequote/quote_service.dart';
 import 'package:gohealthination/pages/freequote/quotedetail.dart';
 import 'package:gohealthination/shared/custom_text.dart';
 
-import '../../shared/dravermenu.dart';
 import 'models/freequotemodel.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Quote extends StatefulWidget {
+  const Quote({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Quote> createState() => _QuoteState();
 }
 
-class _HomeState extends State<Home> {
+class _QuoteState extends State<Quote> {
   final QuoteService _service = QuoteService();
   List<Result> _quotes =[];
   bool? isLoading;
@@ -45,19 +44,14 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      drawer: const NavDrawer(),
-      appBar: AppBar(
-        backgroundColor: color1,
-        title: const CustomText(text:'Teklifler',color: Colors.white),
-      ),
        body: isLoading==null ? const Center(child: CircularProgressIndicator()) :
     isLoading == true ? ListView.builder(
     itemCount: _quotes.length,
     itemBuilder: (context, index) => Card(
       elevation: 3,
-      color:  Colors.white,
+      color:  Colors.white70,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: color1, width: ScreenUtil().setWidth(2)),
+      //  side: BorderSide(color: color1, width: ScreenUtil().setWidth(2)),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Container(height: ScreenUtil().setHeight(100), alignment: Alignment.center,
@@ -66,7 +60,7 @@ class _HomeState extends State<Home> {
           trailing:
           Icon(Icons.arrow_forward, color:  color1 ),
           onTap: ()  {
-            Navigator.pushReplacement(
+            Navigator.push(
                 context,
                 CupertinoPageRoute(
                     builder: (context) =>

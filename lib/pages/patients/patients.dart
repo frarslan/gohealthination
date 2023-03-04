@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gohealthination/pages/patients/patients_service.dart';
 import 'package:gohealthination/shared/custom_text.dart';
 
-import '../../shared/dravermenu.dart';
 import 'models/patientsmodel.dart';
 
 class Patients extends StatefulWidget {
@@ -46,19 +45,14 @@ class _PatientsState extends State<Patients> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      drawer: const NavDrawer(),
-      appBar: AppBar(
-        backgroundColor: color1,
-        title: const CustomText(text:'Hasta Süreci',color: Colors.white),
-      ),
       body: isLoading==null ? const Center(child: CircularProgressIndicator()) :
       isLoading == true ? ListView.builder(
           itemCount: _patients.length,
           itemBuilder: (context, index) => Card(
             elevation: 3,
-            color:  Colors.white,
+            color:  Colors.white70,
             shape: RoundedRectangleBorder(
-              side: BorderSide(color: color1, width: ScreenUtil().setWidth(2)),
+         //     side: BorderSide(color: color1, width: ScreenUtil().setWidth(2)),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Container(height: ScreenUtil().setHeight(100), alignment: Alignment.center,
