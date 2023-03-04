@@ -7,7 +7,7 @@ import 'package:gohealthination/core/custom_appbar.dart';
 import 'package:gohealthination/core/custom_bottombar.dart';
 import 'package:gohealthination/core/menu_items.dart';
 import 'package:gohealthination/pages/patients/patients.dart';
-import 'package:gohealthination/pages/patients/tasks.dart';
+import 'package:gohealthination/pages/task/tasks.dart';
 
 import 'freequote/quote.dart';
 

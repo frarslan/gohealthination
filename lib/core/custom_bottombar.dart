@@ -29,14 +29,14 @@ class CustomBottomBar extends StatelessWidget {
                           icon: Icon(
                             tabs[index].icon,
                             color: state.icon == tabs[index].icon
-                                ? color1
-                                : Colors.black,
+                                ? color2
+                                : color1,
                           ),
                           child: CustomText(fontSize: 20.sp,
                             text: tabs[index].title,
                             color: state.icon == tabs[index].icon
-                                ? color1
-                                : Colors.black,
+                                ? color2
+                                : color1,
                           ),
                         ),
                       ))),
