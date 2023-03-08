@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gohealthination/pages/patients/patients_service.dart';
+import 'package:gohealthination/pages/patients/patientsdetail.dart';
 import 'package:gohealthination/shared/custom_text.dart';
 
 import 'models/patientsmodel.dart';
@@ -61,15 +62,15 @@ class _PatientsState extends State<Patients> {
                 trailing:
                 Icon(Icons.arrow_forward, color:  color1 ),
                 onTap: ()  {
-               /*   Navigator.pushReplacement(
+                  Navigator.push(
                       context,
                       CupertinoPageRoute(
                           builder: (context) =>
-                              QuoteDetail(_quotes[index].id!)));*/
+                              PatientDetail(_patients[index].id!)));
 
                 },
-                title: CustomText(text:"${_patients[index].id}. ${_patients[index].firstName} ",fontSize: 26.sp),
-                subtitle: CustomText(text:_patients[index].email,fontSize: 20.sp),
+                title: CustomText(text:"${_patients[index].id}. ${_patients[index].patient?.fullname} ",fontSize: 26.sp),
+                subtitle: CustomText(text:"${_patients[index].patient?.email} ",fontSize: 20.sp),
               ),
             ),
           )): const Center(child:  CustomText(text:"Hata")) ,

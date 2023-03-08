@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-Patientsmodel patientsmodelFromJson(String str) => Patientsmodel.fromJson(json.decode(str));
+PatientsModel patientsModelFromJson(String str) => PatientsModel.fromJson(json.decode(str));
 List<Result> resultModelFromJson(dynamic str) => List<Result>.from(json.decode(str).map((x) => Result.fromJson(x)));
 
-String patientsmodelToJson(Patientsmodel data) => json.encode(data.toJson());
+String patientsModelToJson(PatientsModel data) => json.encode(data.toJson());
 
-class Patientsmodel {
-  Patientsmodel({
+class PatientsModel {
+  PatientsModel({
     this.count,
     this.next,
     this.previous,
-    this.results = const [],
+    required this.results,
   });
 
   int? count;
@@ -18,7 +18,7 @@ class Patientsmodel {
   String? previous;
   List<Result> results;
 
-  factory Patientsmodel.fromJson(Map<String, dynamic> json) => Patientsmodel(
+  factory PatientsModel.fromJson(Map<String, dynamic> json) => PatientsModel(
     count: json["count"],
     next: json["next"],
     previous: json["previous"],
@@ -29,390 +29,166 @@ class Patientsmodel {
     "count": count,
     "next": next,
     "previous": previous,
-    "results": List<dynamic>.from(results.map((x) => x.toJson())),
+    "results": List<dynamic>.from(results.map((x) => x?.toJson())),
   };
 }
 
 class Result {
   Result({
     this.id,
-    this.profile,
-     this.statusPatient= const [],
-     this.billingAddress= const [],
-    this.joinedDateTr,
-    this.joinedDateEn,
-    this.fullname,
-    this.patientComments,
-    this.lastLogin,
-    this.username,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.isActive,
-    this.dateJoined,
+    this.orderStatus=const [],
+    this.patient,
+    this.treatment,
+    this.subTreatment,
+    this.coupon,
+    this.treatmentId,
+    this.subTreatmentId,
+    this.couponId,
+    this.patientId,
+    this.messageContent,
+    this.orderDate,
+    this.openAddress,
+    this.currency,
+    this.offerPrice,
+    this.totalPrice,
+    this.discountedPrice,
+    this.operationPrice,
+    this.orderSource,
+    this.isOnlineMeeting,
+    this.patientNote,
+    this.doctors=const [],
   });
 
   int? id;
-  Profile? profile;
-  List<StatusPatient> statusPatient;
-  List<BillingAddress> billingAddress;
-  String? joinedDateTr;
-  String? joinedDateEn;
-  String? fullname;
-  PatientComments? patientComments;
-  String? lastLogin;
-  String? username;
-  String? firstName;
-  String? lastName;
-  String? email;
-  bool? isActive;
-  String? dateJoined;
+  List<OrderStatus?> orderStatus;
+  Patient? patient;
+  String? treatment;
+  String? subTreatment;
+  String? coupon;
+  int? treatmentId;
+  int? subTreatmentId;
+  int? couponId;
+  int? patientId;
+  String? messageContent;
+  String? orderDate;
+  String? openAddress;
+  String? currency;
+  String? offerPrice;
+  String? totalPrice;
+  String? discountedPrice;
+  String? operationPrice;
+  String? orderSource;
+  String? isOnlineMeeting;
+  String? patientNote;
+  List<int?> doctors;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["id"],
-    profile: Profile.fromJson(json["profile"]),
-    statusPatient: List<StatusPatient>.from(json["status_patient"].map((x) => StatusPatient.fromJson(x))),
-    billingAddress: List<BillingAddress>.from(json["billing_address"].map((x) => BillingAddress.fromJson(x))),
-    joinedDateTr: json["joined_date_tr"],
-    joinedDateEn: json["joined_date_en"],
-    fullname: json["fullname"],
-    patientComments: PatientComments.fromJson(json["patient_comments"]),
-    lastLogin: json["last_login"],
-    username: json["username"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    email: json["email"],
-    isActive: json["is_active"],
-    dateJoined: json["date_joined"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "profile": profile?.toJson(),
-    "status_patient": List<dynamic>.from(statusPatient.map((x) => x.toJson())),
-    "billing_address": List<dynamic>.from(billingAddress.map((x) => x.toJson())),
-    "joined_date_tr": joinedDateTr,
-    "joined_date_en": joinedDateEn,
-    "fullname": fullname,
-    "patient_comments": patientComments?.toJson(),
-    "last_login": lastLogin,
-    "username": username,
-    "first_name": firstName,
-    "last_name": lastName,
-    "email": email,
-    "is_active": isActive,
-    "date_joined": dateJoined,
-  };
-}
-
-class BillingAddress {
-  BillingAddress({
-    this.id,
-    this.city,
-    this.state,
-    this.country,
-    this.cityId,
-    this.stateId,
-    this.countryId,
-    this.openAddress,
-    this.addressHeader,
-    this.addedDate,
-    this.idNumber,
-    this.taxId,
-    this.taxOffice,
-    this.user,
-  });
-
-  int? id;
-  String? city;
-  String? state;
-  String? country;
-  int? cityId;
-  int? stateId;
-  int? countryId;
-  String? openAddress;
-  String? addressHeader;
-  String? addedDate;
-  String? idNumber;
-  String? taxId;
-  String? taxOffice;
-  int? user;
-
-  factory BillingAddress.fromJson(Map<String, dynamic> json) => BillingAddress(
-    id: json["id"],
-    city: json["city"],
-    state: json["state"],
-    country: json["country"],
-    cityId: json["city_id"],
-    stateId: json["state_id"],
-    countryId: json["country_id"],
+    orderStatus: List<OrderStatus>.from(json["order_status"].map((x) => OrderStatus.fromJson(x))),
+    patient: Patient.fromJson(json["patient"]),
+    treatment: json["treatment"],
+    subTreatment: json["subTreatment"],
+    coupon: json["coupon"],
+    treatmentId: json["treatment_id"],
+    subTreatmentId: json["subTreatment_id"],
+    couponId: json["coupon_id"],
+    patientId: json["patient_id"],
+    messageContent: json["messageContent"],
+    orderDate: json["orderDate"],
     openAddress: json["openAddress"],
-    addressHeader: json["addressHeader"],
-    addedDate: json["added_date"],
-    idNumber: json["idNumber"],
-    taxId: json["taxId"],
-    taxOffice: json["taxOffice"],
-    user: json["user"],
+    currency: json["currency"],
+    offerPrice: json["offerPrice"],
+    totalPrice: json["totalPrice"],
+    discountedPrice: json["discountedPrice"],
+    operationPrice: json["operationPrice"],
+    orderSource: json["orderSource"],
+    isOnlineMeeting: json["isOnlineMeeting"],
+    patientNote: json["patientNote"],
+    doctors: List<int>.from(json["doctors"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "city": city,
-    "state": state,
-    "country": country,
-    "city_id": cityId,
-    "state_id": stateId,
-    "country_id": countryId,
+    "order_status": List<dynamic>.from(orderStatus.map((x) => x?.toJson())),
+    "patient": patient?.toJson(),
+    "treatment": treatment,
+    "subTreatment": subTreatment,
+    "coupon": coupon,
+    "treatment_id": treatmentId,
+    "subTreatment_id": subTreatmentId,
+    "coupon_id": couponId,
+    "patient_id": patientId,
+    "messageContent": messageContent,
+    "orderDate": orderDate,
     "openAddress": openAddress,
-    "addressHeader": addressHeader,
-    "added_date": addedDate,
-    "idNumber": idNumber,
-    "taxId": taxId,
-    "taxOffice": taxOffice,
-    "user": user,
+    "currency": currency,
+    "offerPrice": offerPrice,
+    "totalPrice": totalPrice,
+    "discountedPrice": discountedPrice,
+    "operationPrice": operationPrice,
+    "orderSource": orderSource,
+    "isOnlineMeeting": isOnlineMeeting,
+    "patientNote": patientNote,
+    "doctors": List<dynamic>.from(doctors.map((x) => x)),
   };
 }
 
-class PatientComments {
-  PatientComments({
+class OrderStatus {
+  OrderStatus({
     this.id,
-     this.patientPhotos= const [],
-    this.comment,
-    this.rating,
-    this.doctorFeedback,
-    this.doctorRating,
-    this.hospitalFeedback,
-    this.hospitalRating,
-    this.hotelFeedback,
-    this.hotelRating,
-    this.travelAgentFeedback,
-    this.travelAgentRating,
-    this.videoLink,
-    this.date,
-    this.before,
-    this.after,
-    this.publishConfirm,
-    this.patient,
-    this.treatment,
+    this.createdBy,
+    this.name,
+    this.notes,
+    this.statusCreatedAt,
     this.order,
   });
 
   int? id;
-  List<PatientPhoto?> patientPhotos;
-  String? comment;
-  int? rating;
-  String? doctorFeedback;
-  int? doctorRating;
-  String? hospitalFeedback;
-  int? hospitalRating;
-  String? hotelFeedback;
-  int? hotelRating;
-  String? travelAgentFeedback;
-  int? travelAgentRating;
-  String? videoLink;
-  String? date;
-  String? before;
-  String? after;
-  bool? publishConfirm;
-  int? patient;
-  int? treatment;
+  String? createdBy;
+  String? name;
+  String? notes;
+  String? statusCreatedAt;
   int? order;
 
-  factory PatientComments.fromJson(Map<String, dynamic> json) => PatientComments(
+  factory OrderStatus.fromJson(Map<String, dynamic> json) => OrderStatus(
     id: json["id"],
-    patientPhotos: json["patient_photos"] != null ? List<PatientPhoto>.from(json["patient_photos"]?.map((x) => PatientPhoto.fromJson(x))) : [],
-    comment: json["comment"],
-    rating: json["rating"],
-    doctorFeedback: json["doctorFeedback"],
-    doctorRating: json["doctorRating"],
-    hospitalFeedback: json["hospitalFeedback"],
-    hospitalRating: json["hospitalRating"],
-    hotelFeedback: json["hotelFeedback"],
-    hotelRating: json["hotelRating"],
-    travelAgentFeedback: json["travelAgentFeedback"],
-    travelAgentRating: json["travelAgentRating"],
-    videoLink: json["videoLink"],
-    date: json["date"],
-    before: json["before"],
-    after: json["after"],
-    publishConfirm: json["publishConfirm"],
-    patient: json["patient"],
-    treatment: json["treatment"],
+    createdBy: json["created_by"],
+    name: json["name"],
+    notes: json["notes"],
+    statusCreatedAt: json["status_created_at"],
     order: json["order"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-   // "patient_photos": List<dynamic>.from(patientPhotos.map((x) => x?.toJson())),
-    "comment": comment,
-    "rating": rating,
-    "doctorFeedback": doctorFeedback,
-    "doctorRating": doctorRating,
-    "hospitalFeedback": hospitalFeedback,
-    "hospitalRating": hospitalRating,
-    "hotelFeedback": hotelFeedback,
-    "hotelRating": hotelRating,
-    "travelAgentFeedback": travelAgentFeedback,
-    "travelAgentRating": travelAgentRating,
-    "videoLink": videoLink,
-    "date": date,
-    "before": before,
-    "after": after,
-    "publishConfirm": publishConfirm,
-    "patient": patient,
-    "treatment": treatment,
+    "created_by": createdBy,
+    "name": name,
+    "notes": notes,
+    "status_created_at": statusCreatedAt,
     "order": order,
   };
 }
 
-class PatientPhoto {
-  PatientPhoto({
+class Patient {
+  Patient({
     this.id,
-    this.photo,
-    this.patientComment,
+    this.email,
+    this.fullname,
   });
 
   int? id;
-  String? photo;
-  int? patientComment;
+  String? email;
+  String? fullname;
 
-  factory PatientPhoto.fromJson(Map<String, dynamic> json) => PatientPhoto(
+  factory Patient.fromJson(Map<String, dynamic> json) => Patient(
     id: json["id"],
-    photo: json["photo"],
-    patientComment: json["patientComment"],
+    email: json["email"],
+    fullname: json["fullname"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "photo": photo,
-    "patientComment": patientComment,
-  };
-}
-
-class Profile {
-  Profile({
-    this.id,
-    this.age,
-    this.role,
-    this.smsPermission,
-    this.emailPermission,
-    this.idNumber,
-    this.birthday,
-    this.gender,
-    this.phoneNumber,
-    this.userPhoto,
-    this.openAddress,
-    this.bankAccountName,
-    this.iBanNumber,
-    this.adminNotes,
-    this.user,
-    this.country,
-    this.state,
-    this.city,
-  });
-
-  int? id;
-  int? age;
-  String? role;
-  bool? smsPermission;
-  bool? emailPermission;
-  int? idNumber;
-  DateTime? birthday;
-  String? gender;
-  String? phoneNumber;
-  String? userPhoto;
-  String? openAddress;
-  String? bankAccountName;
-  String? iBanNumber;
-  String? adminNotes;
-  int? user;
-  int? country;
-  int? state;
-  int? city;
-
-  factory Profile.fromJson(Map<String, dynamic> json) => Profile(
-    id: json["id"],
-    age: json["age"],
-    role: json["role"],
-    smsPermission: json["smsPermission"],
-    emailPermission: json["emailPermission"],
-    idNumber: json["idNumber"],
-    birthday: json["birthday"]!= null ?DateTime.parse(json["birthday"]):null,
-    gender: json["gender"],
-    phoneNumber: json["phoneNumber"],
-    userPhoto: json["userPhoto"],
-    openAddress: json["openAddress"],
-    bankAccountName: json["bankAccountName"],
-    iBanNumber: json["iBANNumber"],
-    adminNotes: json["adminNotes"],
-    user: json["user"],
-    country: json["country"],
-    state: json["state"],
-    city: json["city"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "age": age,
-    "role": role,
-    "smsPermission": smsPermission,
-    "emailPermission": emailPermission,
-    "idNumber": idNumber,
-    "birthday": "${birthday?.year.toString().padLeft(4, '0')}-${birthday?.month.toString().padLeft(2, '0')}-${birthday?.day.toString().padLeft(2, '0')}",
-    "gender": gender,
-    "phoneNumber": phoneNumber,
-    "userPhoto": userPhoto,
-    "openAddress": openAddress,
-    "bankAccountName": bankAccountName,
-    "iBANNumber": iBanNumber,
-    "adminNotes": adminNotes,
-    "user": user,
-    "country": country,
-    "state": state,
-    "city": city,
-  };
-}
-
-class StatusPatient {
-  StatusPatient({
-    this.id,
-    this.name,
-    this.notes,
-    this.createdAt,
-    this.updatedAt,
-    this.patient,
-    this.createdBy,
-    this.updatedBy,
-  });
-
-  int? id;
-  String? name;
-  String? notes;
-  String? createdAt;
-  String? updatedAt;
-  int? patient;
-  int? createdBy;
-  int? updatedBy;
-
-  factory StatusPatient.fromJson(Map<String, dynamic> json) => StatusPatient(
-    id: json["id"],
-    name: json["name"],
-    notes: json["notes"],
-    createdAt: json["created_at"],
-    updatedAt: json["updated_at"],
-    patient: json["patient"],
-    createdBy: json["created_by"],
-    updatedBy: json["updated_by"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "notes": notes,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
-    "patient": patient,
-    "created_by": createdBy,
-    "updated_by": updatedBy,
+    "email": email,
+    "fullname": fullname,
   };
 }
