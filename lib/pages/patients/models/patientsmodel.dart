@@ -29,7 +29,7 @@ class PatientsModel {
     "count": count,
     "next": next,
     "previous": previous,
-    "results": List<dynamic>.from(results.map((x) => x?.toJson())),
+    "results": List<dynamic>.from(results.map((x) => x.toJson())),
   };
 }
 

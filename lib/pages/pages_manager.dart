@@ -12,7 +12,7 @@ import 'package:gohealthination/pages/task/tasks.dart';
 import 'freequote/quote.dart';
 
 class PagesManager extends StatelessWidget {
-  const PagesManager({super.key});
+   PagesManager({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +22,13 @@ class PagesManager extends StatelessWidget {
         body: BlocBuilder<PagesRoute, PageGeneral>(
           builder: (context, state) {
             return Container(
-                padding: const EdgeInsets.all(0), child: selectionPage(state));
+                padding: const EdgeInsets.all(0),
+                child: selectionPage(state));
           },
         ),
-        bottomNavigationBar: CustomBottomBar());
+      floatingActionButton: _buildFloatingActionButton(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: CustomBottomBar(),);
   }
 
   Widget selectionPage(PageGeneral page) {
@@ -40,5 +43,14 @@ class PagesManager extends StatelessWidget {
     } else {
       return const Tasks();
     }
+  }
+
+  Widget _buildFloatingActionButton(BuildContext context) {
+    return FloatingActionButton(backgroundColor: const Color(0xff7367f0),
+      onPressed: () {
+        BlocProvider.of<PagesRoute>(context).selection(HomePage());
+      },
+      child: const Icon(Icons.home,size: 35),
+    );
   }
 }

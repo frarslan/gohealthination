@@ -13,8 +13,9 @@ class CustomButton extends StatelessWidget {
   final String text;
   final ButtonType type;
 
-  final _colorRed = const Color(0xff3e2093);
+  final _colorPurple = const Color(0xff7367f0);
   final _colorGrey = const Color(0xfff0f0f0);
+  final _colorRed =  Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +37,11 @@ class CustomButton extends StatelessWidget {
   buttonColor() {
     switch (type) {
       case ButtonType.darkTheme:
-        return _colorRed;
+        return _colorPurple;
       case ButtonType.lightTheme:
         return _colorGrey;
+      case ButtonType.redTheme:
+        return _colorRed;
     }
   }
 
@@ -48,8 +51,10 @@ class CustomButton extends StatelessWidget {
         return Colors.white;
       case ButtonType.lightTheme:
         return Colors.black;
+      case ButtonType.redTheme:
+        return Colors.white;
     }
   }
 }
 
-enum ButtonType { darkTheme, lightTheme }
+enum ButtonType { darkTheme, lightTheme, redTheme }

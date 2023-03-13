@@ -1,18 +1,25 @@
 import 'dart:convert';
 
 import 'package:gohealthination/pages/freequote/models/detailmodel.dart';
+import 'package:gohealthination/pages/freequote/models/treatmentwidemodel.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
+import '../../shared/service/service_interceptor.dart';
 import '../auth/auth_progress.dart';
 import 'models/freequotemodel.dart';
 
 class QuoteService{
+  final DioClient _dioClient = DioClient();
   final String url = 'https://backend.gohealthination.com/additions/freequote/';
+  final String urltre = 'https://backend.gohealthination.com/orders/treatment_wide/';
 
   Future<Freequotemodel?> bringQuotes() async {
+
     var response = await http.get(Uri.parse(url), headers: {
       'Accept-Charset': 'utf-8',
       'Content-Type': 'application/json; charset=utf-8',
+
     });
     if(response.statusCode==200){
       var responseBody = response.body;
@@ -25,6 +32,28 @@ class QuoteService{
     return null;
   }
 
+  Future<TreatmentWideModel> bringtreatmentt() async {
+    Response response = await _dioClient.dio.get('/orders/treatment_wide/');
+    return treatmentWideModelFromJson(response.data);
+  }
+
+
+  Future<TreatmentWideModel?> bringtreatment() async {
+
+    var response = await http.get(Uri.parse(urltre), headers: {
+      'Accept-Charset': 'utf-8',
+      'Content-Type': 'application/json; charset=utf-8',
+    });
+    if(response.statusCode==200){
+      var responseBody = response.body;
+      var encodedBody = utf8.decode(responseBody.runes.toList());
+      var jsonBody = TreatmentWideModel.fromJson(jsonDecode(encodedBody));
+      return jsonBody;
+    } else {
+      print("istek olumsuz =>${response.statusCode}");
+    }
+    return null;
+  }
   Future<Detailmodel?> bringQuotesDetail(int id) async {
     var response = await http.get(Uri.parse(url+id.toString()), headers: {
       'Accept-Charset': 'utf-8',

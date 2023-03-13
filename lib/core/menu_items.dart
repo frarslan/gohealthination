@@ -7,21 +7,21 @@ abstract class PageGeneral {
 
 class HomePage extends PageGeneral {
   @override
-  String get title => 'Ana Sayfa';
+  String get title => 'Home';
   @override
   IconData get icon => Icons.home;
 }
 
 class FormsPage extends PageGeneral {
   @override
-  String get title => 'Formlar';
+  String get title => 'Forms';
   @override
   IconData get icon => Icons.file_copy;
 }
 
 class PatientsPage extends PageGeneral {
   @override
-  String get title => 'Hastalar';
+  String get title => 'Patients';
   @override
   IconData get icon => Icons.person;
 }
@@ -35,7 +35,7 @@ class MeetingsPage extends PageGeneral {
 
 class TasksPage extends PageGeneral {
   @override
-  String get title => 'Görevler';
+  String get title => 'Tasks';
   @override
   IconData get icon => Icons.task;
 }

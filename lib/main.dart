@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gohealthination/pages/auth/auth_bloc.dart';
+import 'package:gohealthination/pages/auth/landingpage.dart';
 import 'package:gohealthination/pages/auth/splash_screen.dart';
 import 'package:gohealthination/pages/auth/welcome.dart';
 import 'package:gohealthination/pages/pages_manager.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
                     case AuthState.offline:
                       return const WelcomePage();
                     case AuthState.online:
-                      return const PagesManager();
+                      return  const LandingPage();
                     default:
                       return const SplashScreen();
                   }

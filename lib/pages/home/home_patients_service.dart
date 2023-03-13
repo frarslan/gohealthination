@@ -22,8 +22,6 @@ class HomePatientsService{
       'Content-Type': 'application/json; charset=utf-8',
       'Authorization': 'Token $token'
     });
-    print('Tüm Hastalar listendi.');
-    print(token);
 
     if(response.statusCode==200){
       var responseBody = response.body;
@@ -48,8 +46,6 @@ class HomePatientsService{
           'Content-Type': 'application/json; charset=utf-8',
           'Authorization': 'Token $token'
         });
-    print('Aktif  Hastalar Listelendi');
-    print(token);
 
     if(response.statusCode==200){
       var responseBody = response.body;
@@ -74,8 +70,7 @@ class HomePatientsService{
           'Content-Type': 'application/json; charset=utf-8',
           'Authorization': 'Token $token'
         });
-    print('Aday  Hastalar Listelendi');
-    print(token);
+
 
     if(response.statusCode==200){
       var responseBody = response.body;

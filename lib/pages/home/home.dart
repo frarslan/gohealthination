@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gohealthination/shared/custom_text.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../../shared/calendar.dart';
 import 'home_patients_service.dart';
@@ -17,7 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  Color color1 = const Color(0xff3e2093);
+  Color color1 = const Color(0xff7367f0);
   Color color2 = const Color(0xff37b2cb);
   Color color3 = const Color(0xfffef5e4);
 
@@ -80,7 +79,7 @@ class _HomeState extends State<Home> {
             children: [
               Card(
                 elevation: 3,
-                color: Colors.white70,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   //  side: BorderSide(color: color1, width: ScreenUtil().setWidth(2)),
                   borderRadius: BorderRadius.circular(10),
@@ -95,9 +94,9 @@ class _HomeState extends State<Home> {
                       Container(
                           padding: const EdgeInsets.all(12).r,
                           decoration:
-                          BoxDecoration(shape: BoxShape.circle, color: color3),
+                          const BoxDecoration(shape: BoxShape.circle, color: Colors.cyan),
                           child:
-                          Icon(Icons.people, color: color1)),
+                          const Icon(Icons.people, color: Colors.white)),
                       CustomText(text: "${_patients.length}", fontSize: 26.sp),
                       CustomText(text: "Patients", fontSize: 24.sp),
                     ],
@@ -107,13 +106,13 @@ class _HomeState extends State<Home> {
               ),
               Card(
                 elevation: 3,
-                color: Colors.white70,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   //  side: BorderSide(color: color1, width: ScreenUtil().setWidth(2)),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Container(height: 140.h,
-                  width: 100.w,
+                  width: 110.w,
                   padding: const EdgeInsets.all(10).r,
                   alignment: Alignment.center,
                   child: Column(
@@ -122,10 +121,10 @@ class _HomeState extends State<Home> {
                       Container(
                           padding: const EdgeInsets.all(12).r,
                           decoration:
-                          BoxDecoration(shape: BoxShape.circle, color: color3),
+                          const BoxDecoration(shape: BoxShape.circle, color: Colors.red),
                           child:
                           const Icon(
-                              Icons.monitor_heart_outlined, color: Colors.red)),
+                              Icons.monitor_heart_outlined, color: Colors.white)),
                       CustomText(
                           text: "${_patientsActive.length}", fontSize: 26.sp),
                       CustomText(text: "A. Patients", fontSize: 20.sp),
@@ -136,13 +135,13 @@ class _HomeState extends State<Home> {
               ),
               Card(
                 elevation: 3,
-                color: Colors.white70,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   //  side: BorderSide(color: color1, width: ScreenUtil().setWidth(2)),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Container(height: 140.h,
-                  width: 100.w,
+                  width: 110.w,
                   padding: const EdgeInsets.all(10).r,
                   alignment: Alignment.center,
                   child: Column(
@@ -151,9 +150,9 @@ class _HomeState extends State<Home> {
                       Container(
                           padding: const EdgeInsets.all(12).r,
                           decoration:
-                          BoxDecoration(shape: BoxShape.circle, color: color3),
+                          const BoxDecoration(shape: BoxShape.circle, color: Colors.green),
                           child:
-                          Icon(Icons.monitor_heart_outlined, color: color1)),
+                          const Icon(Icons.monitor_heart_outlined, color: Colors.white)),
                       CustomText(text: "${_patientsCandidate.length}",
                           fontSize: 26.sp),
                       CustomText(text: "C. Patients", fontSize: 20.sp),
@@ -164,9 +163,10 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
+          SizedBox(height: 30.h),
           Card(
             elevation: 3,
-            color: Colors.white70,
+            color: Colors.white,
             shape: RoundedRectangleBorder(
               //  side: BorderSide(color: color1, width: ScreenUtil().setWidth(2)),
               borderRadius: BorderRadius.circular(10),
@@ -182,36 +182,5 @@ class _HomeState extends State<Home> {
     );
   }
 }
- /* List<Appointment> getAppointments() {
-    List<Appointment> meetings = <Appointment>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime =
-    DateTime(today.year, today.month, today.day, 9, 0, 0);
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-
-    meetings.add(Appointment(
-        startTime: startTime,
-        endTime: endTime,
-        subject: 'Board Meeting',
-        color: Colors.blue,
-        recurrenceRule: 'FREQ=DAILY;COUNT=6',
-        isAllDay: false));
-
-    meetings.add(Appointment(
-        startTime: startTime,
-        endTime: endTime,
-        subject: 'Board Meeting',
-        color: Colors.yellow,
-        recurrenceRule: 'FREQ=DAILY;COUNT=2',
-        isAllDay: false));
-
-    return meetings;
-  }
-
-  class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Appointment> source) {
-  appointments = source;
-  }
-  }*/
 
 

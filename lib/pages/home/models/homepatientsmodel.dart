@@ -3,6 +3,7 @@ import 'dart:convert';
 HomePatientsmodel homepatientsmodelFromJson(String str) => HomePatientsmodel.fromJson(json.decode(str));
 List<Results> resultModelFromJson(dynamic str) => List<Results>.from(json.decode(str).map((x) => Results.fromJson(x)));
 
+
 String homepatientsmodelToJson(HomePatientsmodel data) => json.encode(data.toJson());
 
 class HomePatientsmodel {

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gohealthination/pages/freequote/models/detailmodel.dart';
 import 'package:gohealthination/pages/freequote/quote_service.dart';
 import 'package:gohealthination/shared/custom_text.dart';
+import 'package:gohealthination/pages/freequote/models/treatmentwidemodel.dart' as treatment;
 
 import '../../shared/custom_button.dart';
 
@@ -17,12 +18,12 @@ class QuoteDetail extends StatefulWidget {
 }
 
 class _QuoteDetailState extends State<QuoteDetail> {
-
+  List<treatment.Result> _treatment = [];
   final QuoteService _service = QuoteService();
   Detailmodel _quoteDetail = Detailmodel();
   bool? isLoading;
 
-  Color color1 = const Color(0xff3e2093);
+  Color color1 = const Color(0xff7367f0);
   Color color2 = const Color(0xff37b2cb);
   Color color3 = const Color(0xfffef5e4);
 
@@ -41,7 +42,19 @@ class _QuoteDetailState extends State<QuoteDetail> {
         });
       }
     });
+    _service.bringtreatment().then((value){
+      if(_service != null && value?.results != null)  {
+        setState(() {
+          _treatment=value!.results;
 
+          isLoading=true;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    });
   }
 
   @override
@@ -54,7 +67,7 @@ class _QuoteDetailState extends State<QuoteDetail> {
       },
       child: Scaffold(
         appBar: AppBar(backgroundColor: color1,
-          title: CustomText(text: 'Başvuru Detay',fontSize: 26.sp,color: Colors.white,),
+          title: CustomText(text: 'Forms Detail',fontSize: 26.sp,color: Colors.white,),
         ),
         body:isLoading==null ? const Center(child: CircularProgressIndicator()) :
         isLoading == true ? SingleChildScrollView(
@@ -78,7 +91,12 @@ class _QuoteDetailState extends State<QuoteDetail> {
                         child: CustomText(text: '${_quoteDetail.firstName![0]}${_quoteDetail.lastName![0]}',fontSize: 70.sp)
                     ),
                   ),
-                    CustomText(text: '${_quoteDetail.firstName} ${_quoteDetail.lastName}',),
+                    CustomText(text: _quoteDetail.treatment != null && _treatment.any((t) => t.id == _quoteDetail.treatment)
+                        ? _treatment.firstWhere((t) => t.id == _quoteDetail.treatment).nameTr ?? "---"
+                        : "---",
+                      fontSize: 20.sp,color: Colors.black38,
+                    ),
+                    CustomText(text: '${_quoteDetail.firstName} ${_quoteDetail.lastName}',fontSize: 26.sp,),
                   ],
                 ),
               ),
@@ -90,29 +108,38 @@ class _QuoteDetailState extends State<QuoteDetail> {
               Container(
                 padding:const EdgeInsets.fromLTRB(10,0,20,10).r ,
                 child: Divider(
-                  color: color2,
+                  color: color1,
                   height: 3.h,
                 ),
               ),
                Container(
                  padding:const EdgeInsets.all(10).r ,
-                   child: CustomText(text: ' Full Name: ${_quoteDetail.firstName} ${_quoteDetail.lastName}', fontSize: 24.sp)
+                   child: CustomText(text: ' Full Name : ${_quoteDetail.firstName} ${_quoteDetail.lastName}', fontSize: 24.sp)
                ),
               Container(
                   padding:const EdgeInsets.all(10).r ,
-                  child: CustomText(text: ' Email: ${(_quoteDetail.email==null)?'yok':_quoteDetail.email}', fontSize: 24.sp)
+                  child: CustomText(text: ' Email : ${(_quoteDetail.email==null)?'yok':_quoteDetail.email}', fontSize: 24.sp)
+              ),
+
+              Container(
+                padding:const EdgeInsets.all(10).r ,
+                child: CustomText(text:'Treatment : ${_quoteDetail.treatment != null && _treatment.any((t) => t.id == _quoteDetail.treatment)
+                    ? _treatment.firstWhere((t) => t.id == _quoteDetail.treatment).nameTr ?? "---"
+                    : "---"}',
+                  fontSize: 24.sp,
+                ),
+              ),
+              Container(
+                padding:const EdgeInsets.all(10).r ,
+                child: CustomText(text:'Subtreatment : ${_quoteDetail.treatment != null &&_treatment.any((t) => t.id == _quoteDetail.treatment)
+                    ? _treatment.firstWhere((t) => t.id == _quoteDetail.treatment).subTreatment.map((sub) => sub.nameTr ?? '')
+                    .join(', ') : '---'}',
+                  fontSize: 24.sp,
+                ),
               ),
               Container(
                   padding:const EdgeInsets.all(10).r ,
-                  child: CustomText(text: ' Phone Number: ${(_quoteDetail.phoneNumber==null)?'yok':_quoteDetail.phoneNumber}', fontSize: 24.sp)
-              ),
-              Container(
-                  padding:const EdgeInsets.all(10).r ,
-                  child: CustomText(text: ' Source: ${(_quoteDetail.source==null)?'yok':_quoteDetail.source}', fontSize: 24.sp)
-              ),
-              Container(
-                  padding:const EdgeInsets.all(10).r ,
-                  child: CustomText(text: ' confirmed: ${(_quoteDetail.confirmed==null)?'yok':_quoteDetail.confirmed}', fontSize: 24.sp)
+                  child: CustomText(text: ' Phone Number : ${(_quoteDetail.phoneNumber==null)?'yok':_quoteDetail.phoneNumber}', fontSize: 24.sp)
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -131,7 +158,7 @@ class _QuoteDetailState extends State<QuoteDetail> {
                       margin: const EdgeInsets.only(top: 71).r,
                       width: 100.w,
                       child: CustomButton(
-                        type: ButtonType.darkTheme,
+                        type: ButtonType.redTheme,
                         text: 'Delete',
                         function: () {
                           showDeleteDialog(widget.id);

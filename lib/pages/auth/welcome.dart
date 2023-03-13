@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gohealthination/pages/auth/auth_bloc.dart';
 import 'package:gohealthination/shared/custom_button.dart';
 import 'package:gohealthination/shared/logo.dart';
 import 'logi.dart';
@@ -25,7 +23,7 @@ class WelcomePage extends StatelessWidget {
                     width: double.infinity,
                     child: CustomButton(
                       type: ButtonType.darkTheme,
-                      text: 'Giriş Yap',
+                      text: 'Login',
                       function: () {
                         Navigator.push(
                             context,

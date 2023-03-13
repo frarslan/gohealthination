@@ -9,37 +9,38 @@ import 'menu_items.dart';
 class CustomBottomBar extends StatelessWidget {
   CustomBottomBar({super.key});
 
-  final tabs = [HomePage(), FormsPage(), PatientsPage(), MeetingsPage(),TasksPage()];
-  Color color1 = const Color(0xff3e2093);
-  Color color2 = const Color(0xff37b2cb);
+  final tabs = [FormsPage(), PatientsPage(), MeetingsPage(),TasksPage()];
+  Color color1 =  Colors.black38;
+  Color color2 = const Color(0xff7367f0);
+  @override
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PagesRoute, PageGeneral>(
       builder: (context, state) {
-        return Container(
+        return BottomAppBar(
           color: const Color(0xfff4f5fa),
+          shape: const CircularNotchedRectangle(),
           child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(
-                  tabs.length,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(
+              tabs.length,
                   (index) => InkWell(
-                        onTap: () =>
-                            context.read<PagesRoute>().selection(tabs[index]),
-                        child: Tab(
-                          icon: Icon(
-                            tabs[index].icon,
-                            color: state.icon == tabs[index].icon
-                                ? color2
-                                : color1,
-                          ),
-                          child: CustomText(fontSize: 20.sp,
-                            text: tabs[index].title,
-                            color: state.icon == tabs[index].icon
-                                ? color2
-                                : color1,
-                          ),
-                        ),
-                      ))),
+                onTap: () =>
+                    context.read<PagesRoute>().selection(tabs[index]),
+                child: Tab(
+                  icon: Icon(
+                    tabs[index].icon,
+                    color: state.icon == tabs[index].icon ? color2 : color1,
+                  ),
+                  child: CustomText(
+                    fontSize: 20.sp,
+                    text: tabs[index].title,
+                    color: state.icon == tabs[index].icon ? color2 : color1,
+                  ),
+                ),
+              ),
+            ),
+          ),
         );
       },
     );

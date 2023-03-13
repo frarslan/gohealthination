@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: const CustomText(
-          text: 'Giriş Yap',
+          text: 'Login',
           fontSize: 18,
         ),
         iconTheme: const IconThemeData(color: Colors.black),
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsets.only(top: 69, bottom: 7).r,
                   alignment: Alignment.centerLeft,
                   child: const CustomText(
-                    text: 'E-Posta',
+                    text: 'E-Mail',
                     fontSize: 16,
                   ),
                 ),
@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                   margin: const EdgeInsets.only(top: 31, bottom: 7).r,
                   alignment: Alignment.centerLeft,
                   child: const CustomText(
-                    text: 'Şifre',
+                    text: 'Password',
                     fontSize: 16,
                   ),
                 ),
